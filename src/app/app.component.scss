@@ -1,0 +1,19 @@
+:host {
+  display: block;
+  height: 100vh;
+
+  .wrapper {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+
+    .top {
+      flex-grow: 1;
+      padding: 2rem;
+    }
+
+    .bottom {
+      padding: 2rem;
+    }
+  }
+}
