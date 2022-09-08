@@ -18,3 +18,4 @@ Frontend engineering challenge from Mable.
 - Improve the layout to serpate dumb components from feature level ones (components that call services are smart, common ones that just emit upwards are dumb).
 - Create a generic component file and folder components extend so it can share the proposed-name logic once rather than duplicating.
 - JS recursion doesnt have tail call optimization support in all browsers - switch from recursion to loops......
+- Make a list of expected icons and import them in as opposed to re defining them whenever we need them.
