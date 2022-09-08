@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { environment } from '../../../../environments/environment';
 import { NodeModel } from '../../services/filesystem.models';
 import { FilesystemService } from '../../services/filesystem.service';
@@ -8,7 +8,7 @@ import { FilesystemService } from '../../services/filesystem.service';
   templateUrl: './folder.component.html',
   styleUrls: ['./folder.component.scss'],
 })
-export class FolderComponent implements OnInit {
+export class FolderComponent {
   @Input() folderNode!: NodeModel;
 
   folderIcon = `${environment.iconsPath}/folder.svg`;
@@ -17,16 +17,25 @@ export class FolderComponent implements OnInit {
 
   constructor(private filesystem: FilesystemService) {}
 
-  ngOnInit(): void {}
-
+  /**
+   * Sets the name of the provided folder node.
+   *
+   * @param name The proposed name.
+   */
   setName(name: string): void {
     this.folderNode.setName(name);
   }
 
+  /**
+   * Requests the filesystem service to create a unset child node on this component.
+   */
   createChildNode() {
     this.filesystem.addNode(this.folderNode.id);
   }
 
+  /**
+   * Requests the filesystem service to deletee this node. Will do this regardless of children.
+   */
   deleteNode() {
     this.filesystem.deleteNode(this.folderNode.id);
   }

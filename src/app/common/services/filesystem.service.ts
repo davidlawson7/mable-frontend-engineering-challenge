@@ -2,6 +2,13 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { NodeModel, NodeType } from './filesystem.models';
 
+/**
+ * Singleton FileSystem service that acts like a store (think NgRx in my mind). You can add and delete nodes to the
+ * file structure.
+ *
+ * NOTE: After doing this I remembered that JS recursion doesnt have tail call optimization support in all browsers.
+ * TODO: Change to purely a loop based system to future proof.
+ */
 @Injectable({
   providedIn: 'root',
 })
@@ -16,7 +23,13 @@ export class FilesystemService {
     this.model.next(this.fs);
   }
 
-  addNode(parentId?: string) {
+  /**
+   * Adds a new node to a specific parent using its ID to search. Does this by a Depth First Search (DFS) against the
+   * filesystem (fs) using recursion.
+   *
+   * @param parentId The parent id of the node we want to append a child to.
+   */
+  addNode(parentId?: string): void {
     if (!parentId) {
       // Add a top level node, or level 1
       const newFileNode = new NodeModel(1);
@@ -39,13 +52,31 @@ export class FilesystemService {
     this.model.next(this.fs);
   }
 
-  deleteNode(nodeId: string) {
+  /**
+   * Deletes a node from the filesystem based on the provided ID. Does this by a Depth First Search (DFS) against the
+   * filesystem (fs) using recursion.
+   *
+   * This function does not care if the provided node has children and will delete those too.
+   *
+   * @param nodeId
+   */
+  deleteNode(nodeId: string): void {
     if (!this.fs.children) {
       console.error('No child nodes to search through to delete, error');
       return;
     }
-    return this._deleteNode(nodeId, this.fs.children, this.fs);
+    const node = this._deleteNode(nodeId, this.fs.children, this.fs);
+
+    if (!node) {
+      console.error('Error - failed to delete the node, could not find.');
+    }
+    this.model.next(this.fs);
   }
+
+  /**
+   * Helper functions.
+   * These are ugly, would refactor a bit if i had time.
+   */
 
   private _addNode(id: string, nodes: NodeModel[]): NodeModel | null {
     for (const node of nodes) {

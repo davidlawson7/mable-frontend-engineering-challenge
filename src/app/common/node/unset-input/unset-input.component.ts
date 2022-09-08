@@ -8,9 +8,13 @@ import { NodeModel, NodeType } from '../../services/filesystem.models';
 })
 export class UnsetInputComponent {
   @Input() unsetNode!: NodeModel;
-
   readonly nodeType = NodeType;
 
+  /**
+   * Sets the current unset node to a NodeType (either file or folder based on html).
+   *
+   * @param nodeType preferably File or Folder.
+   */
   setType(nodeType: NodeType) {
     this.unsetNode.setType(nodeType);
   }

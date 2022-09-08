@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { NodeModel } from '../../services/filesystem.models';
 import { environment } from '../../../../environments/environment';
+
 @Component({
   selector: 'app-proposed-name',
   templateUrl: './proposed-name.component.html',
@@ -17,16 +17,21 @@ export class ProposedNameComponent {
   folderIcon = `${environment.iconsPath}/folder.svg`;
   fileIcon = `${environment.iconsPath}/file.svg`;
 
-  constructor() {}
-
-  tryAndNameNode() {
+  /**
+   * Attempts to name the unamed node. If the current name is empty, it will fail. Once a name is provided
+   * it will emit that value upwards.
+   */
+  tryAndNameNode(): void {
     if (!this.proposedName || this.proposedName === '') {
-      console.error('Error - proposed node name cannot be empty');
+      console.warn('Warn - proposed node name cannot be empty');
       return;
     }
     this.setName.emit(this.proposedName);
   }
 
+  /**
+   * If the cancel button is pressed, it emits upwards so the parent component can handle it.
+   */
   cancelNodeCreation() {
     this.cancel.emit();
   }

@@ -8,6 +8,4 @@ import { NodeModel } from '../services/filesystem.models';
 })
 export class NodeComponent {
   @Input() node!: NodeModel;
-
-  constructor() {}
 }

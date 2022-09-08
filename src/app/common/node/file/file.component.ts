@@ -16,10 +16,18 @@ export class FileComponent {
 
   constructor(private filesystem: FilesystemService) {}
 
+  /**
+   * Sets the name of the provided file node.
+   *
+   * @param name The proposed name.
+   */
   setName(name: string): void {
     this.fileNode.setName(name);
   }
 
+  /**
+   * Requests the filesystem service to deletee this node. Will do this regardless of children.
+   */
   deleteNode() {
     this.filesystem.deleteNode(this.fileNode.id);
   }

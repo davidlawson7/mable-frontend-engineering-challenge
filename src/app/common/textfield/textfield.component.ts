@@ -8,9 +8,14 @@ import { Component, Input, OnInit } from '@angular/core';
 export class TextfieldComponent {
   @Input() value: string = '';
 
+  /**
+   * Takes whatever is value is provided to the textfield and saves it to the clients clipboard.
+   *
+   * @param textfieldEl
+   */
   copyValue(textfieldEl: HTMLTextAreaElement) {
-    console.log('copying');
     textfieldEl.select();
     document.execCommand('copy');
+    console.log('Copied JSON...');
   }
 }
