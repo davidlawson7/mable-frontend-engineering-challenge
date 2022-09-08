@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { NodeModel } from '../services/filesystem.models';
 
 @Component({
@@ -6,10 +6,8 @@ import { NodeModel } from '../services/filesystem.models';
   templateUrl: './node.component.html',
   styleUrls: ['./node.component.scss'],
 })
-export class NodeComponent implements OnInit {
+export class NodeComponent {
   @Input() node!: NodeModel;
 
   constructor() {}
-
-  ngOnInit(): void {}
 }

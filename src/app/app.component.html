@@ -3,7 +3,7 @@
     <section class="top">
       <app-button (clickEvent)="addRootNode()">Add folder to root</app-button>
       <ng-container *ngFor="let node of rootNode.children">
-        <ul>
+        <ul class="rootNodesList">
           <app-node [node]="node"></app-node>
         </ul>
       </ng-container>

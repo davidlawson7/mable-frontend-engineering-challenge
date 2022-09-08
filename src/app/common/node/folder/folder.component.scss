@@ -1,0 +1,37 @@
+@import "../../../styles/variables";
+
+:host {
+  display: block;
+
+  .folderWrapper {
+    padding: $padding-node;
+    border-radius: $border-radius-node;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .button {
+      visibility: hidden;
+    }
+
+    .nodeName {
+      margin: 0 $border-radius-node;
+    }
+
+    &:hover {
+      border: $border-one;
+
+      .button {
+        visibility: visible;
+      }
+    }
+  }
+
+  .children {
+    padding-left: 1rem;
+
+    .childrenList {
+      padding: 0;
+    }
+  }
+}

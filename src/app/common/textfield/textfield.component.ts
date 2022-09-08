@@ -7,4 +7,10 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class TextfieldComponent {
   @Input() value: string = '';
+
+  copyValue(textfieldEl: HTMLTextAreaElement) {
+    console.log('copying');
+    textfieldEl.select();
+    document.execCommand('copy');
+  }
 }

@@ -1,29 +1,16 @@
 @import "../../../styles/variables";
 
 :host {
-  display: block;
-
-  .fileWrapper {
+  .wrapper {
+    border: $border-one;
     padding: $padding-node;
     border-radius: $border-radius-node;
     display: flex;
     justify-content: center;
     align-items: center;
 
-    .button {
-      visibility: hidden;
-    }
-
-    .nodeName {
+    .unsetNodeInput {
       margin: 0 $border-radius-node;
-    }
-
-    &:hover {
-      border: $border-one;
-
-      .button {
-        visibility: visible;
-      }
     }
   }
 }

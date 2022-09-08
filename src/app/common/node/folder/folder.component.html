@@ -1,1 +1,30 @@
-<p>folder works!</p>
+<ng-container *ngIf="folderNode && folderNode.name; else proposedName">
+  <div class="folderWrapper">
+    <app-icon [src]="folderIcon" [alt]="'folder icon'"></app-icon>
+    <span class="nodeName">
+      {{ folderNode.name }}
+    </span>
+
+    <button class="button buttonAdd" (click)="createChildNode()">
+      <app-icon [src]="plusIcon" [alt]="'plus icon'"></app-icon>
+    </button>
+    <button class="button buttonDelete" (click)="deleteNode()">
+      <app-icon [src]="binIcon" [alt]="'bin icon'"></app-icon>
+    </button>
+  </div>
+  <div class="children" *ngIf="folderNode.children">
+    <ul class="childrenList">
+      <ng-container *ngFor="let node of folderNode.children">
+        <app-node [node]="node"></app-node>
+      </ng-container>
+    </ul>
+  </div>
+</ng-container>
+
+<ng-template #proposedName
+  ><app-proposed-name
+    [isFolder]="true"
+    (setName)="setName($event)"
+    (cancel)="deleteNode()"
+  ></app-proposed-name
+></ng-template>

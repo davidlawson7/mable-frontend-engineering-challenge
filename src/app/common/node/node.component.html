@@ -1,3 +1,12 @@
-<ng-container *ngIf="node">
-  <div class="wrapper">{{ node.id }}</div>
+<ng-container *ngIf="node && node.type !== 'root'; else badNodeCase">
+  <ng-container [ngSwitch]="node.type">
+    <app-folder *ngSwitchCase="'folder'" [folderNode]="node"></app-folder>
+    <app-file *ngSwitchCase="'file'" [fileNode]="node"></app-file>
+    <app-unset-input
+      *ngSwitchCase="'unset'"
+      [unsetNode]="node"
+    ></app-unset-input>
+  </ng-container>
 </ng-container>
+
+<ng-template #badNodeCase>Error - Cannot have root node here</ng-template>

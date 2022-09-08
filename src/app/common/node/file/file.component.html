@@ -1,1 +1,20 @@
-<p>file works!</p>
+<ng-container *ngIf="fileNode && fileNode.name; else proposedName">
+  <div class="fileWrapper">
+    <app-icon [src]="fileIcon" [alt]="'file icon'"></app-icon>
+    <span class="nodeName">
+      {{ fileNode.name }}
+    </span>
+
+    <button class="button buttonDelete" (click)="deleteNode()">
+      <app-icon [src]="binIcon" [alt]="'bin icon'"></app-icon>
+    </button>
+  </div>
+</ng-container>
+
+<ng-template #proposedName
+  ><app-proposed-name
+    [isFolder]="false"
+    (setName)="setName($event)"
+    (cancel)="deleteNode()"
+  ></app-proposed-name
+></ng-template>

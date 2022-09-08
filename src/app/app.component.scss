@@ -10,6 +10,10 @@
     .top {
       flex-grow: 1;
       padding: 2rem;
+
+      .rootNodesList {
+        padding: 0;
+      }
     }
 
     .bottom {

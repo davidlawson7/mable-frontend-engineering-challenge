@@ -19,7 +19,9 @@ export class FilesystemService {
   addNode(parentId?: string) {
     if (!parentId) {
       // Add a top level node, or level 1
-      this.fs.addChild(new NodeModel(1));
+      const newFileNode = new NodeModel(1);
+      newFileNode.setType(NodeType.Folder);
+      this.fs.addChild(newFileNode);
       this.model.next(this.fs);
       return;
     }
@@ -35,6 +37,14 @@ export class FilesystemService {
     }
 
     this.model.next(this.fs);
+  }
+
+  deleteNode(nodeId: string) {
+    if (!this.fs.children) {
+      console.error('No child nodes to search through to delete, error');
+      return;
+    }
+    return this._deleteNode(nodeId, this.fs.children, this.fs);
   }
 
   private _addNode(id: string, nodes: NodeModel[]): NodeModel | null {
@@ -56,6 +66,47 @@ export class FilesystemService {
         // Is a folder, is not the parent to create in and has no children, skip
         continue;
       }
+    }
+    return null;
+  }
+
+  private _deleteNode(
+    id: string,
+    nodes: NodeModel[],
+    parent: NodeModel
+  ): NodeModel | null {
+    for (const node of nodes) {
+      if (node.type === NodeType.Folder && node.children) {
+        const possibleNode = this._deleteNode(id, node.children, node);
+        if (possibleNode) {
+          return possibleNode;
+        }
+      }
+
+      if (node.id === id) {
+        // Found the node, delete the node and all children from the parent. Use array slice. return the deleted node.
+        const indexInParentList = parent.children?.findIndex(
+          (node) => node.id === id
+        );
+        if (indexInParentList === -1 || indexInParentList === undefined) {
+          console.error('Error - Cannot delete node, not in provided list');
+          return null;
+        }
+
+        if (parent.children === undefined || parent.children.length === 0) {
+          continue;
+        }
+
+        // Set the new children with the old one removed
+        parent.children = [
+          ...parent.children.slice(0, indexInParentList),
+          ...parent.children.slice(indexInParentList + 1),
+        ];
+
+        return node;
+      }
+
+      continue;
     }
     return null;
   }

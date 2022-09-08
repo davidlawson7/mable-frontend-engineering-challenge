@@ -1,27 +1,18 @@
 # MableFrontendEngineeringChallenge
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.2.1.
+Frontend engineering challenge from Mable.
 
-## Development server
+- This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.2.1.
+- I use RxJs as it was provided with Angular upon install, and a standard library with it.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+## Getting Started
 
-## Code scaffolding
+- Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Remaining Work
 
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+- Add guide lines for each list using the ::before object
+- Clean up the css. Add improved styling for buttons and nodes
+- Fix some bugs in the add/delete algorithms - uses DFS. I likely needs improvements and proper testing given its the most complex part.
+- Move the node editing to the service so components are dumb and dont do work.
+- improve the layout to serpate dumb components from feature level ones.

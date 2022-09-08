@@ -1,1 +1,9 @@
-<textarea class="textfield" disabled [value]="value"></textarea>
+<div class="wrapper">
+  <textarea
+    class="textfield"
+    readonly
+    [value]="value"
+    (click)="copyValue(json)"
+    #json
+  ></textarea>
+</div>

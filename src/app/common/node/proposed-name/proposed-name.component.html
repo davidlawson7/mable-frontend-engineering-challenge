@@ -1,0 +1,14 @@
+<div class="wrapper">
+  <app-icon
+    [src]="isFolder ? folderIcon : fileIcon"
+    [alt]="'file or folder icon'"
+  ></app-icon>
+
+  <input class="unsetNodeInput" [(ngModel)]="proposedName" />
+  <button (click)="tryAndNameNode()">
+    <app-icon [src]="checkIcon" [alt]="'check icon'"></app-icon>
+  </button>
+  <button (click)="cancelNodeCreation()">
+    <app-icon [src]="crossIcon" [alt]="'cross icon'"></app-icon>
+  </button>
+</div>
