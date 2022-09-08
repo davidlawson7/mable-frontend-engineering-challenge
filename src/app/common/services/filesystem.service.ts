@@ -40,13 +40,13 @@ export class FilesystemService {
     }
 
     if (!this.fs.children) {
-      console.error('No child nodes to search through, error');
+      console.error('Error - No child nodes to search through, error');
       return;
     }
 
     const newNode = this._addNode(parentId, this.fs.children);
     if (!newNode) {
-      console.error('No nodes were a match, error');
+      console.error('Error - No nodes were a match, error');
     }
 
     this.model.next(this.fs);
@@ -62,7 +62,9 @@ export class FilesystemService {
    */
   deleteNode(nodeId: string): void {
     if (!this.fs.children) {
-      console.error('No child nodes to search through to delete, error');
+      console.error(
+        'Error - No child nodes to search through to delete, error'
+      );
       return;
     }
     const node = this._deleteNode(nodeId, this.fs.children, this.fs);

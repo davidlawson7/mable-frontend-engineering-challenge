@@ -17,7 +17,6 @@ export class AppComponent {
   }
 
   addRootNode() {
-    console.log('adding root node');
     this.filesystem.addNode();
   }
 
